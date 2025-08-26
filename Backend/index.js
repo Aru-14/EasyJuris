@@ -8,7 +8,7 @@ const { askDocumentQuestion } = require('./Services/askDocumentQuestion'); // Fo
 const { SaveDocument } = require('./Services/SaveDocument'); // For saving documents
 const connectDB = require('./Models/db'); // Ensure DB connection is established
 const ClauseByClauseExplanation  = require('./Services/ClauseByClauseExplanation'); // For clause-by-clause analysis
-
+const{ getDocumentInfo }=require('./Services/getDocumentInfo')
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -55,13 +55,19 @@ app.get("/process/:fileId", async (req, res) => {
   
     // Summarize
     const summary = await processPDF(text);
-    
+    const documentInfo=await getDocumentInfo(text);
+  const { 
+  document_type, 
+  parties_involved, 
+  authenticity 
+} = documentInfo;
+
     // Save document metadata to MongoDB
     const fileName = req.query.filename || "Untitled Document";
-    await SaveDocument(fileId, fileName, text, summary);
+    await SaveDocument(fileId, fileName, text, summary,document_type,parties_involved,authenticity);
 
     // Return fileId and summary
-    res.json({ fileId, summary });
+    res.json({ fileId, summary,document_type,parties_involved,authenticity });
 
   } catch (err) {
     console.error("Processing error:", err);

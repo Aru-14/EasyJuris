@@ -40,64 +40,109 @@ const ClauseByClauseExplanation = async (fileID) => {
 }
 
 
-const getClauseExplanationByChunks = async (clauses,extractedText)=>{
+// const getClauseExplanationByChunks = async (clauses,extractedText)=>{
 
-let results=[];
+// let results=[];
 
-for(let i=0;i<clauses.length;i++){
+// for(let i=0;i<4;i++){
 
-const model = genAI.getGenerativeModel({  model: "gemini-2.0-flash-lite" });
+// const model = genAI.getGenerativeModel({  model: "gemini-2.0-flash-lite" });
 
-const prompt = `
-    Analyze this legal clause briefly in easy human english. Return JSON with:
-    - "clause_text": Original (make concise if long)
-    - "risk_level": "High", "Medium", "Low" based on severity, how serious the clause is, how important the issue is
-    - "explanation": Short summary with easy human english
-    - "suggested_action": Brief suggestion if risky 
+// const prompt = `
+//     Analyze this legal clause briefly in easy human english. Return **exactly one JSON object** for this clause with:
+//     - "clause_text": Original (make concise if long)
+//     - "risk_level": "High", "Medium", "Low" based on severity, how serious the clause is, how important the issue is
+//     - "explanation": Short summary with easy human english
+//     - "suggested_action": Brief suggestion if risky 
 
-    High risk: indefinite terms, penalties, ambiguous language
-    Medium: vague or one-sided terms
-    Low: standard text, no big issue for common man
+//     High risk: indefinite terms, penalties, ambiguous language
+//     Medium: vague or one-sided terms
+//     Low: standard text, no big issue for common man
 
-    Clause:
-    ${clauses[i]}
+//     Clause:
+//     ${clauses[i]}
     
-    Take the help of whole legal document for generating the summarized explanation of clause
+//     Take the help of whole legal document for generating the summarized explanation of clause
 
-    ${extractedText}
+//     ${extractedText}
 
-    Return Format:
-    {
-  "clause_text": "...",
-  "risk_level": "...",
-  "explanation": "...",
-  "suggested_action": "..."
-    }
+//     Return Format:
+//     {
+//   "clause_text": "...",
+//   "risk_level": "...",
+//   "explanation": "...",
+//   "suggested_action": "..."
+//     }
     
-  `;
+//   `;
 
-  console.log(prompt.length);
-const response = await model.generateContent(prompt)
-console.log("Prompt done");
- let cleanedText = response.response.text().replace(/```json|```/g, '').trim();
+//   console.log(prompt.length);
+// const response = await model.generateContent(prompt)
+// console.log("Prompt done");
+//  let cleanedText = response.response.text().replace(/```json|```/g, '').trim();
+//     try {
+//       const jsonObj = JSON.parse(cleanedText);
+//       // results.push(jsonObj);
+//       results.push(...jsonObj)
+//       console.log(jsonObj);
+//     } catch (err) {
+//       console.error("JSON Parse failed for clause:", clauses[i], "Raw response:", cleanedText);
+//     }
+
+
+
+// await waitForNextPrompt(2000);
+
+
+
+// }
+const getClauseExplanationByChunks = async (clauses, extractedText) => {
+  let results = [];
+
+  for (let i = 0; i < 4; i++) {
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
+
+    const prompt = `
+      Analyze this legal clause briefly in easy human english. Return **exactly one JSON object** for this clause with:
+      - "clause_text"
+      - "risk_level"
+      - "explanation"
+      - "suggested_action"
+
+      Clause:
+      ${clauses[i]}
+
+      Use the whole legal document for reference:
+      ${extractedText}
+
+      Return Format:
+      {
+        "clause_text": "...",
+        "risk_level": "...",
+        "explanation": "...",
+        "suggested_action": "..."
+      }
+    `;
+
+    const response = await model.generateContent(prompt);
+    const cleanedText = response.response.text().replace(/```json|```/g, '').trim();
+
     try {
       const jsonObj = JSON.parse(cleanedText);
-      results.push(jsonObj);
+      results.push(jsonObj); // <-- push single object only
       console.log(jsonObj);
     } catch (err) {
       console.error("JSON Parse failed for clause:", clauses[i], "Raw response:", cleanedText);
     }
 
+    await waitForNextPrompt(2000);
+  }
 
-
-await waitForNextPrompt(2000);
-
-
-
+  return results;
 }
 
-return results;
-}
+
+
 
 
   

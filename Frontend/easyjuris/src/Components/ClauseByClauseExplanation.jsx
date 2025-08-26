@@ -11,7 +11,7 @@ const ClauseByClauseExplanation = ()  => {
  const { fileID } = useParams(); // Extracts fileID from URL
 console.log(fileID)
     const [clauses, setClauses] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
             console.log("Requested")
             console.log("Requested")
 
@@ -81,12 +81,12 @@ console.log(fileID)
 // } */}
   
   {loading ? (
-  <div className="flex justify-center items-center h-64">
+  <div className="flex justify-center items-center h-64 ">
     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
     <span className="ml-3 text-gray-600">Analyzing document...</span>
   </div>
 ) : (    
-  <div className="space-y-4">
+  <div className="space-y-4 mt-10">
     {clauses.length > 0 ? (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {clauses.map((clause, index) => {
