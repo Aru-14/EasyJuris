@@ -97,7 +97,7 @@ const handleAskQuestion = async () => {
   try {
     setLoadingAnswer(true);
 
-    const res = await fetch("hhttps://easyjuris.onrender.com/qna", {
+    const res = await fetch("https://easyjuris.onrender.com/qna", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
