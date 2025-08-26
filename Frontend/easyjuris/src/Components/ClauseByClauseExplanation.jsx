@@ -26,7 +26,7 @@ console.log(fileID)
                 return;
             }
             console.log("Fetching clause explanations for fileID:");
-            const response = await fetch(`http://localhost:5000/clausebyclause/${fileID}`);
+            const response = await fetch(`https://easyjuris.onrender.com/clausebyclause/${fileID}`);
             console.log("Response received")
             if (response.ok) {
                 const data = await response.json();
