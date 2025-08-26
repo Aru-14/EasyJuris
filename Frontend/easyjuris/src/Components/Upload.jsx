@@ -32,7 +32,7 @@ console.log("navigated to clause by clause explanation");
     formData.append("file", file); // key must match multer.single("file")
 
     try {
-      const res = await fetch("http://localhost:5000/upload", {
+      const res = await fetch("https://easyjuris.onrender.com/upload", {
         method: "POST",
         body: formData,
       });
@@ -62,7 +62,7 @@ console.log("navigated to clause by clause explanation");
     }
 
     try {
-      const res = await fetch(`http://localhost:5000/process/${fileId}`);
+      const res = await fetch(`https://easyjuris.onrender.com/process/${fileId}`);
       if (res.ok) {
         const data = await res.json();
         console.log("Processing successful:", data);
@@ -97,7 +97,7 @@ const handleAskQuestion = async () => {
   try {
     setLoadingAnswer(true);
 
-    const res = await fetch("http://localhost:5000/qna", {
+    const res = await fetch("hhttps://easyjuris.onrender.com/qna", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
