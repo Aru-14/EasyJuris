@@ -49,7 +49,7 @@ console.log(fileID)
 
    <button  className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 " onClick={handleClauseExplanations}>Get Clause Explanation</button> 
 
-
+<p className="text-gray-400 mt-2 mb-2"> Only 4 clauses will be explained (due to RPD limit of Gemini API; for prototype) </p>
 
  {/* {loading ? ( */}
   {/* //     <p>Loading...</p> */}
