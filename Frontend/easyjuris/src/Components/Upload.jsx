@@ -139,7 +139,7 @@ const handleAskQuestion = async () => {
     {/* --- Upload Section --- */}
     <section className="bg-white border-0 rounded-xl shadow-2xl p-8">
       <h2 className="text-2xl font-semibold mb-4">Upload Your Document</h2>
-      <p> Only PDFs or images (for prototype) </p>
+      <p className="text-gray-100"> Only PDFs or images (for prototype) </p>
       <input
         type="file"
         onChange={handleFileChange}
