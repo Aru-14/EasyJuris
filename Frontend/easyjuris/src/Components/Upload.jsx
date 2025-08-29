@@ -149,7 +149,7 @@ const handleAskQuestion = async () => {
                    file:rounded-md file:border-0 file:text-sm file:font-semibold
                    file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100"
       />
-      {!uploaded && <p className="mt-2 text-blue-500">⏳ Please wait...</p>}
+      {!uploaded && <p className="mt-2 text-purple-400">Please wait...</p>}
       <div className="flex gap-4">
         <button
           onClick={handleUpload}
