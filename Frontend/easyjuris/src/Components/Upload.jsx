@@ -12,6 +12,7 @@ const [loadingAnswer, setLoadingAnswer] = useState(false);
 const [documentType, setDocumentType] = useState("");
 const [partiesInvolved, setPartiesInvolved] = useState([]);
 const [authenticity, setAuthenticity] = useState("NA");
+  const [uploaded,setUploaded]=useState(true);
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
@@ -23,14 +24,15 @@ console.log("navigated to clause by clause explanation");
 }
 
   const handleUpload = async () => {
+    setUploaded(false);
     if (!file) {
       alert("Please select a file first!");
       return;
     }
 
     const formData = new FormData();
-    formData.append("file", file); // key must match multer.single("file")
-
+    formData.append("file", file); 
+    
     try {
       const res = await fetch("https://easyjuris.onrender.com/upload", {
         method: "POST",
@@ -41,7 +43,7 @@ console.log("navigated to clause by clause explanation");
         const data = await res.json();
         console.log("Upload successful:", data);
         setFileId(data.fileId);
-       
+        setUploaded(true);
         alert("File uploaded successfully!");
       } else {
         console.error("Upload failed");
@@ -147,7 +149,7 @@ const handleAskQuestion = async () => {
                    file:rounded-md file:border-0 file:text-sm file:font-semibold
                    file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100"
       />
-
+      {!uploaded && <p className="mt-2 text-blue-500">⏳ Please wait...</p>}
       <div className="flex gap-4">
         <button
           onClick={handleUpload}
