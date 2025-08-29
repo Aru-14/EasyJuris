@@ -13,6 +13,7 @@ const [documentType, setDocumentType] = useState("");
 const [partiesInvolved, setPartiesInvolved] = useState([]);
 const [authenticity, setAuthenticity] = useState("NA");
   const [uploaded,setUploaded]=useState(true);
+  const [summaryLoading,setSummaryLoading]=useState(true);
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
@@ -58,6 +59,7 @@ console.log("navigated to clause by clause explanation");
 
 
   const handleProcess = async () => {
+    setSummaryLoading(false);
     if (!fileId) {
       alert("No file uploaded yet!");
       return;
@@ -72,6 +74,7 @@ console.log("navigated to clause by clause explanation");
          setDocumentType(data.document_type);
 setPartiesInvolved(data.parties_involved || []);
 setAuthenticity(data.authenticity);
+        setSummaryLoading(true);
       } else {
         console.error("Processing failed");
         alert("Processing failed");
@@ -165,8 +168,7 @@ const handleAskQuestion = async () => {
         </button>
       </div>
     </section>
-
-    {/* --- Results Section --- */}
+    {!summaryLoading && (<p className="text-gray-500">EasyJuris is analyzing...</p>)}
     {summary && (
       <section className="flex flex-col gap-10">
 
