@@ -100,7 +100,7 @@ const getClauseExplanationByChunks = async (clauses, extractedText) => {
   let results = [];
 
   for (let i = 0; i < 4; i++) {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     const prompt = `
       Analyze this legal clause briefly in easy human english. Return **exactly one JSON object** for this clause with:
