@@ -28,7 +28,7 @@ Document text:
 ${text}
 `;
 
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
   let result = await model.generateContent(prompt);
 let output = result.response.candidates[0].content.parts[0].text;
  console.log(">> Raw model output:", output);
