@@ -87,11 +87,11 @@ To get a local copy up and running, follow these simple steps.
 1.  **Start the Backend Server**
     ```sh
     cd Backend
-    npm start
+    npm run start
     ```
 2.  **Start the Frontend App**
     ```sh
     cd Frontend
-    npm start
+    npm run dev
     ```
     Open [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000) to view it in your browser.
