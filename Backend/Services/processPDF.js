@@ -7,7 +7,7 @@ require('dotenv').config();
 const genAI = new GoogleGenerativeAI(process.env.GEN_AI_API_KEY);
 
 async function summarizeText(text) {
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite-001" });
   const result = await model.generateContent(`Summarize this in easy and simple English:\n\n${text}`);
   return result.response.text();
 }
