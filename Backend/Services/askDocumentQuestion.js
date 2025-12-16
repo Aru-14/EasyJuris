@@ -29,7 +29,7 @@ async function askDocumentQuestion(fileId, userQuestion) {
   const prompt = `You are a legal assistant AI. Here is the text of a legal document:${extractedText} Answer the following question clearly and in simple English for a general user: Question: ${userQuestion}`;
 
   // Generate answer
-  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
   const result = await model.generateContent(prompt);
 
   // Return plain text
