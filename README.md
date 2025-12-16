@@ -2,6 +2,9 @@
 
 An AI powered legal assisstant for demistifying legal documents, simplifying legal document procedures.
 
+### Demo video
+[(https://youtu.be/y-HdPetfv4U)]
+
 ## 🎯 The Problem
 
 > Complex legal documents cause confusion and high costs; users need clear, easier and actionable guidance.
